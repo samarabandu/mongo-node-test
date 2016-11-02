@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
-mongoose.Promise = require('promise');
 mongoose.connect('mongodb://localhost:27017/bears');
-
+mongoose.Promise = require("bluebird");
 var Schema       = mongoose.Schema;
 
 var BearSchema   = new Schema({
@@ -16,30 +15,21 @@ db.once('open', function() {
   console.log('Connected to database')// we're connected!
 });
 
-var saves=0;
-
 var b1 = new Bear();
-b1.name = "Baloo 3";
-b1.save().then(function(b){
+b1.name = "Baloo 5";
+b1.save().then(function(b) {
   console.log("Saved " + b.name);
-  saves++;
+  Bear.find( { name: /./}, console.log);
 });
 
-var b2 = new Bear();
-b2.name = "Beorn 3";
-b2.save().then(function(b){
-  console.log("Saved " + b.name);
-  saves++;
-});
+// var b2 = new Bear();
+// b2.name = "Beorn 3";
+// b2.save();
 
 
-var b3 = new Bear();
-b3.name = "Corduroy 3";
-b3.save().then(function(b){
-  console.log("Saved " + b.name);
-  saves++;
-});
+// var b3 = new Bear();
+// b3.name = "Corduroy 3";
+// b3.save();
 
-while (saves < 2) {}
 Bear.find( { name: /./}, console.log);
 //process.exit(0);
