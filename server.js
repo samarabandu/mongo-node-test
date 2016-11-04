@@ -15,8 +15,8 @@ db.once('open', function() {
 // Define the schema for our database record (row)
 var Schema       = mongoose.Schema;
 var BearSchema   = new Schema({
-    name: String;
-    time: String; // timestamp
+    name: String,
+    time: String // timestamp
     
 });
 
@@ -36,20 +36,20 @@ function mongoError(err, record) {
 
 var b1 = new Bear(); // Create our first bear
 b1.name = "Baloo";   // Set name
-b1.time = Date();    // Set timestamp
+b1.time = (new Date()).toLocaleString();    // Set timestamp
 b1.save(mongoError); // Save the bear in database
 
 // create the second bear
 // Why can't we reuse b1 by changing the name and timestamp and saving again? Try.
 var b2 = new Bear();
 b2.name = "Beorn";
-b1.time = Date();
+b2.time = (new Date()).toLocaleString(); 
 b2.save(mongoError);
 
 //create the third bear
 var b3 = new Bear();
 b3.name = "Corduroy";
-b1.time = Date();
+b3.time = (new Date()).toLocaleString(); 
 b3.save(mongoError);
 
 // Find all bears and print the full record
