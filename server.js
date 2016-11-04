@@ -16,8 +16,8 @@ mongoose.Promise = require("bluebird");
 // Define the schema for our database record (row)
 var Schema       = mongoose.Schema;
 var BearSchema   = new Schema({
-    name: String;
-    time: String; // timestamp
+    name: String,
+    time: String // timestamp
 });
 
 // Create the prototype object that we will use to create all bears
@@ -26,7 +26,7 @@ var Bear = mongoose.model('Bear', BearSchema);
 // Create the bear and set name and timestamp
 var b1 = new Bear();
 b1.name = "Winnie the Pooh";
-b1.time = Date();
+b1.time = (new Date()).toLocaleString();;
 
 // save() method returns a JavaScript promise. 
 // We use the .then() method of the promise to do something when promise is fulfilled
@@ -35,5 +35,5 @@ b1.save().then(function(b) {
   Bear.find( { name: /./}, console.log);
 });
 
+// This still gets run before the save method above has finished.
 Bear.find( { name: /./}, console.log);
-//process.exit(0);
