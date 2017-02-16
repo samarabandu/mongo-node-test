@@ -1,3 +1,5 @@
+// Sample JavaScript code to use 'mongoose' library
+// Written by Jagath Samarabandu © 2016
 // Make sure that the database is running before starting the server
 // Use ./mongod command on a separate window and leave it running
 
