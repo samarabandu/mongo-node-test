@@ -1,15 +1,17 @@
+// Sample JavaScript code to use 'mongoose' library
+// Written by Jagath Samarabandu © 2016
 // Make sure that the database is running before starting the server
-// Use ./mongod command on a separate window and leave it running
+// Use ./start-mongodb command on a separate window and leave it running
 
 // Using mongoose middleware to interact with the database
 var mongoose = require('mongoose');
 
-// Connect to the local database
+// Step 1: Connect to the database server running on this machine
 mongoose.connect('mongodb://localhost:27017/bears');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
-  console.log('Connected to database')// we're connected!
+  console.log('1. Connected to database')// we're connected!
 });
 
 // Define the schema for our database record (row)
@@ -27,12 +29,14 @@ var Bear = mongoose.model('Bear', BearSchema);
 // We declare this separately since we need to use it multiple times.
 function mongoError(err, record) {
   if (err) {
-    console.log("Could not save " + record.name + ": " + err);
+    console.log("2. Could not save " + record.name + ": " + err);
   }
   else {
-    console.log("Saved " + record.name);
+    console.log("2. Saved " + record.name);
   }
 }
+
+// Step 2: create model objects, set model properties and save
 
 var b1 = new Bear(); // Create our first bear
 b1.name = "Baloo";   // Set name
@@ -52,7 +56,8 @@ b3.name = "Corduroy";
 b3.time = (new Date()).toLocaleString(); 
 b3.save(mongoError);
 
-// Find all bears and print the full record
+// Step 3: Find all bears and print the full record
 // Why does this only show records saved during previous runs (none on first run)
 // Clues are in the order of the console log statements.
+console.log("3. Retrieving all records");
 Bear.find( { name: /./}, console.log);
