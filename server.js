@@ -13,6 +13,7 @@ db.once('open', function() {
 });
 
 // Use 'bluebird' Promise library with mongoose
+// Oct 29, 2019: Blubird library may now be outdated. Try require("promise")
 mongoose.Promise = require("bluebird");
 
 // Define the schema for our database record (row)
